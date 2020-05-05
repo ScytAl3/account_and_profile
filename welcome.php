@@ -51,7 +51,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <!-- default Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte avec profile | Login</title>
+    <title>Compte avec profile | Welcome</title>
     <meta name="author" content="Franck Jakubowski">
     <meta name="description" content="Un site de login avec creation d'un compte et mise à jour du profile associé">
     <!--  favicons -->
@@ -69,7 +69,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <!-- default stylesheet -->
     <link href="css/global.css" rel="stylesheet" type="text/css">
     <!-- current page stylesheet -->
-    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/welcome.css" rel="stylesheet" type="text/css">
     <!-- font import -->
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 </head>
@@ -80,67 +80,17 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <!-- /import du header -->
 
     <div class="container global-padding-top pt-3 mb-5">
-        <!-- message d information pour tester la connexion a la base de donnees -->
-        <div class="alert alert-info text-center" role="alert">
-            <?php require 'pdo/pdo_db_connect.php';
-            // on instancie une connexion pour verifie s il n y a pas d erreurs avec les parametres de connexion
-            $pdo = my_pdo_connexxion();
-            if ($pdo) {
-                echo 'Connexion réussie à la base de données';
-            } else {
-                var_dump($pdo);
-            }
-            ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <!-- affiche un message de bienvenue -->
+        <div class="my-3">
+            <div class="mx-auto px-3 py-2 text-center info-message-bg">
+                <h2 class="card-title">Welcome !</h2>
+            </div>
         </div>
-        <!-- /message d information pour tester la connexion a la base de donnees -->
+        <!-- /affiche un message de bienvenue -->
         <!------------------------------//----------------------------------------
                                     container global 
         ------------------------------------------------------------------------->
-        <!--------------------  formulaire de login ----------------------------->
-        <div class="col-lg-4 bg-light text-dark rounded mx-auto">
-            <h1 class="text-center py-3">Connexion</h1>
-            <form class="form-signin p-3" method="POST" action="php_process/login_process.php">
-                <!-- email input -->
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required autofocus="">
-                </div>
 
-                <!-- password input -->
-                <div class="form-group">
-                    <label>Mot de passe</label>
-                    <input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Password" required>
-                    <a class="pull-right text-muted my-1" href="#"><small>Mot de passe oublié ?</small></a>
-                </div>
-
-                <!-- login button -->
-                <div class="form-group mt-5">
-                    <button class="btn btn-login-gradient btn-lg btn-block text-light text-uppercase" type="submit">connexion</button>
-                </div>
-                <!-- separator -->
-                <div class="media-seperator">
-                    <b>ou</b>
-                </div>
-                <!-- connexion avec les medias sociaux -->
-                <p class="text-center text-muted"><small>Connection avec votre compte</small></p>
-                <div class="social-btn text-center">
-                    <a href="#" class="btn btn-primary btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="btn btn-info btn-lg" title="Twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="btn btn-danger btn-lg" title="Google"><i class="fa fa-google"></i></a>
-                </div>
-                <!-- enregistrer un compte -->
-                <div class="media-seperator">
-                    <h5 class="text-center text-muted mt-2"><small>Sinon créer un compte</small></h5>
-                    <div class="form-group mt-3">
-                        <a class="btn btn-register-gradient btn-lg btn-block text-light text-uppercase" name="signup" role="button" href="sign_up.php">créer un compte</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!---------------------- /formulaire de login ---------------------------->
         <!------------------------------------------------------------------------
                                     container global 
         --------------------------------//--------------------------------------->
