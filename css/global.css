@@ -1,0 +1,24 @@
+/* 
+    Created on : 05 mai 2020
+    Author     : Franck J.
+*/
+
+/*------------------------------- 
+        main components
+--------------------------------- */
+body {
+  padding-top: 50px;
+  background: rgb(122, 229, 251);
+  background: linear-gradient(
+    68deg,
+    rgba(122, 229, 251, 1) 0%,
+    rgba(123, 174, 244, 1) 15%,
+    rgba(65, 125, 191, 1) 40%,
+    rgba(224, 87, 233, 1) 70%,
+    rgba(77, 2, 68, 1) 100%
+  );
+  background-repeat: no-repeat;
+  color: #2b272b;
+  /* font import */
+  font-family: "Oswald", sans-serif;
+}

@@ -1,0 +1,85 @@
+/* 
+    Created on : 03 mars 2020
+    Author     : Franck J.
+*/
+
+/*------------------------------- 
+        form components
+--------------------------------- */
+.form-control {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid grey !important;
+  border-radius: 0 !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.btn-bg-gradient {
+  border-radius: 50px;
+  border-color: rgb(148, 237, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(148, 237, 255, 1) 0%,
+    rgba(65, 125, 191, 1) 40%,
+    rgba(246, 0, 217, 1) 100%
+  );
+  font-size: 18px;
+}
+
+.media-seperator {
+  margin: 50px 0 15px;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+}
+
+.media-seperator b {
+  padding: 0 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 35px;
+  background: #fff;
+  display: inline-block;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  top: -22px;
+  z-index: 1;
+}
+
+.social-btn .btn {
+  color: #fff;
+  margin: 10px 0 0 30px;
+  font-size: 15px;
+  width: 55px;
+  height: 55px;
+  line-height: 38px;
+  border-radius: 50%;
+  font-weight: normal;
+  text-align: center;
+  border: none;
+  transition: all 0.4s;
+}
+
+.social-btn .btn:first-child {
+  margin-left: 0;
+}
+.social-btn .btn:hover {
+  opacity: 0.8;
+}
+.social-btn .btn-primary {
+  background: #507cc0;
+}
+.social-btn .btn-info {
+  background: #64ccf1;
+}
+.social-btn .btn-danger {
+  background: #df4930;
+}
+.social-btn .btn i {
+  font-size: 20px;
+}
