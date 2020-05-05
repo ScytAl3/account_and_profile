@@ -68,7 +68,7 @@ function userExist($where, $valueToTest) {
  */
 function validPassword($loginPwd, $user) {
     // on on appelle la fonction speciale qui verifie le mot de passe saissi grace au Salt et mot de passe chiffre associes a l utilisateur
-    $checkPwd = VerifyEncryptedPassword($user['userSalt'], $user['userPassword'], $loginPwd);
+    $checkPwd = VerifyEncryptedPassword($user['salt'], $user['password'], $loginPwd);
     // ------------------------------------
     //var_dump($checkPwd); die;
     // ------------------------------------

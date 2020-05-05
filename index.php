@@ -18,6 +18,7 @@ if (!isset($_SESSION['current'])) {
     $_SESSION['current'] = array();
     $_SESSION['current']['page'] = '';
     $_SESSION['current']['login'] = false;
+    $_SESSION['current']['userName'] = '';
     $_SESSION['current']['userId'] = time();
     $_SESSION['current']['userRole'] = 'Visitor';
 }
@@ -102,11 +103,18 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <!--------------------  formulaire de login ----------------------------->
         <div class="col-lg-4 bg-light text-dark rounded mx-auto">
             <h1 class="text-center py-3">Connexion</h1>
+
+            <!-- area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+            <div class="alert alert-danger <?= ($_SESSION['error']['message'] != '') ? 'd-block' : 'd-none'; ?> mt-5" role="alert">
+                <p class="lead mt-2"><span><?= $_SESSION['error']['message'] ?></span></p>
+            </div>
+            <!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+            
             <form class="form-signin p-3" method="POST" action="php_process/login_process.php">
                 <!-- email input -->
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required autofocus="">
+                    <input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required>
                 </div>
 
                 <!-- password input -->

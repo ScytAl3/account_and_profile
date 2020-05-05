@@ -21,7 +21,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         // on appelle la fonction qui verifie le mot de passe saisi avec celui chiffre dans la base de donnees 
         $testPwd = validPassword($_POST['password'], $emailValid);
         //
-        //var_dump($testPwd); die;
+        // var_dump($testPwd); die;
         //
         // ---------------------------------------------------------------------------------
         //                                  si  - password valid
@@ -36,18 +36,18 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             // on enregistre comme variables de session - le numero d identifiant
             $_SESSION['current']['userId'] = $emailValid['Id'];
             // on creer une variable de session login en cours
-            $_SESSION['current']['login'] = true;
-            // ---------------------------------------------------------------------------------
-            //                     redirection vers la page de bienvenue
-            // ---------------------------------------------------------------------------------
-            header('location: /../index.php');
+            $_SESSION['current']['login'] = true;            
+            // on détruit les variables d erreur de login de notre session
+            unset($_SESSION['error']);
+            // redirection vers la page de bienvenue
+            header('location: /../welcome.php');
             exit();
             // ---------------------------------------------------------------------------------
             //                                  sinon  - password invalid
             // ---------------------------------------------------------------------------------
         } else {
             // on renvoie un message d erreur (mot de passe non valide)
-            $_SESSION['error']['page'] = 'login';
+            $_SESSION['error']['page'] = 'index';
             $_SESSION['error']['message'] = "Erreur de connexion, veuillez vérifier vos identifiants de connexion";
             // on redirige vers la page de login
             header('location:/../index.php');
@@ -58,7 +58,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         // ---------------------------------------------------------------------------------  
     } else {
         // on renvoie un message d erreur (email n existe pas dans la table)
-        $_SESSION['error']['page'] = 'login';
+        $_SESSION['error']['page'] = 'index';
         $_SESSION['error']['message'] = "Erreur de connexion, veuillez vérifier vos identifiants de connexion";
         // on redirige vers la page de login
         header('location:/../index.php');

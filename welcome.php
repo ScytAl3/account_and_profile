@@ -22,7 +22,7 @@ if (!isset($_SESSION['current'])) {
     $_SESSION['current']['userRole'] = 'Visitor';
 }
 // nom de la page en cours
-$_SESSION['current']['page'] = 'index';
+$_SESSION['current']['page'] = 'welcome';
 //                       CURRENT SESSION
 //----------------------------//----------------------------
 //----------------------------//----------------------------
@@ -83,7 +83,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <!-- affiche un message de bienvenue -->
         <div class="my-3">
             <div class="mx-auto px-3 py-2 text-center info-message-bg">
-                <h2 class="card-title">Welcome !</h2>
+                <h2 class="card-title">Welcome <?= $_SESSION['current']['userName'] ?> !</h2>
             </div>
         </div>
         <!-- /affiche un message de bienvenue -->
