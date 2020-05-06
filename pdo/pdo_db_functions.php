@@ -115,3 +115,46 @@ function createUser($userData) {
     // on retourne le dernier Id cree
     return $pdo -> lastInsertId(); 
 }
+
+// ---------------------------------------------------------------------------
+//              fonction pour remplir les listes deroulantes
+// ---------------------------------------------------------------------------
+/**
+ * retourne le numero identifiant et le libele des tables servant a remplir les listes deroulantes
+ * 
+ * @param String    nom de la table sur lequel porte le select
+ * 
+ * @return Array    retourne un tableau avec la liste des informations demandees
+ */
+function dropDownListReader($table)
+{
+    // on instancie une connexion
+    $pdo = my_pdo_connexxion();
+    // PDO pour creer une exception en cas d'erreur afin de faciliter le traitement des erreurs
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+        // preparation de la requete preparee 
+        $queryList = "SELECT `sign_name` FROM $table";
+        // preparation de la requete pour execution
+        $statement = $pdo->prepare($queryList, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        // execution de la requete
+        $statement->execute();
+        // on verifie s il y a des resultats
+        // --------------------------------------------------------
+        //var_dump($statement->fetchColumn()); die; 
+        // --------------------------------------------------------
+        if ($statement->rowCount() > 0) {
+            $myReader = $statement->fetchAll();
+        } else {
+            $myReader = false;
+        }
+        $statement->closeCursor();
+    } catch (PDOException $ex) {
+        $statement = null;
+        $pdo = null;
+        $msg = "ERREUR PDO Liste déroulate $table.." . $ex->getMessage();
+        die($msg);
+    }
+    // on retourne le resultat
+    return $myReader;
+}

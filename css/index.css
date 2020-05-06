@@ -6,29 +6,9 @@
 /*------------------------------- 
         form components
 --------------------------------- */
-.form-control {
-  background-color: transparent !important;
-  border: none !important;
-  border-bottom: 1px solid grey !important;
-  border-radius: 0 !important;
-}
-
 /*-- forgot password --*/
 .pull-right {
   float: right !important;
-}
-
-/*-- login button --*/
-.btn-login-gradient {
-  border-radius: 50px;
-  border-color: rgb(148, 237, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(148, 237, 255, 1) 0%,
-    rgba(65, 125, 191, 1) 40%,
-    rgba(246, 0, 217, 1) 100%
-  );
-  font-size: 18px;
 }
 
 /*-- social media buttons --*/
@@ -87,15 +67,3 @@
   font-size: 20px;
 }
 
-/*-- register bitton --*/
-.btn-register-gradient {
-  border-radius: 50px;
-  background: rgb(39, 36, 78);
-  background: linear-gradient(
-    260deg,
-    rgba(39, 36, 78, 1) 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  font-size: 18px;
-}

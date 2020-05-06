@@ -53,7 +53,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte avec profile | Welcome</title>
     <meta name="author" content="Franck Jakubowski">
-    <meta name="description" content="Un site de login avec creation d'un compte et mise à jour du profile associé">
+    <meta name="description" content="Un site de login avec creation d'un compte et mise à jour du profil associé">
     <!--  favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">

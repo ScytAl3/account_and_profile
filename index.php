@@ -19,7 +19,7 @@ if (!isset($_SESSION['current'])) {
     $_SESSION['current']['page'] = '';
     $_SESSION['current']['login'] = false;
     $_SESSION['current']['userName'] = '';
-    $_SESSION['current']['userId'] = time();
+    $_SESSION['current']['userId'] = '';
     $_SESSION['current']['userRole'] = 'Visitor';
 }
 // nom de la page en cours
@@ -54,7 +54,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte avec profile | Login</title>
     <meta name="author" content="Franck Jakubowski">
-    <meta name="description" content="Un site de login avec creation d'un compte et mise à jour du profile associé">
+    <meta name="description" content="Un site de login avec creation d'un compte et mise à jour du profil associé">
     <!--  favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
@@ -80,7 +80,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <?php include 'partials/header.php'; ?>
     <!-- /import du header -->
 
-    <div class="container global-padding-top pt-3 mb-5">
+    <div class="container pt-3 mb-5">
         <!-- message d information pour tester la connexion a la base de donnees -->
         <div class="alert alert-info text-center" role="alert">
             <?php require 'pdo/pdo_db_connect.php';
@@ -109,24 +109,24 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
                 <p class="lead mt-2"><span><?= $_SESSION['error']['message'] ?></span></p>
             </div>
             <!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
-            
-            <form class="form-signin p-3" method="POST" action="php_process/login_process.php">
+
+            <form class="form-signin p-3" method="POST" action="php_process/signup_process.php">
                 <!-- email input -->
                 <div class="form-group">
-                    <label>Email</label>
+                    <label for="email">Email</label>
                     <input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required>
                 </div>
 
                 <!-- password input -->
                 <div class="form-group">
-                    <label>Mot de passe</label>
+                    <label for="password">Mot de passe</label>
                     <input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Password" required>
                     <a class="pull-right text-muted my-1" href="#"><small>Mot de passe oublié ?</small></a>
                 </div>
 
                 <!-- login button -->
                 <div class="form-group mt-5">
-                    <button class="btn btn-login-gradient btn-lg btn-block text-light text-uppercase" type="submit">connexion</button>
+                    <button class="btn btn-valid-gradient btn-lg btn-block text-light text-uppercase" type="submit">connexion</button>
                 </div>
                 <!-- separator -->
                 <div class="media-seperator">
