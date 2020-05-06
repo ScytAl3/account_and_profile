@@ -4,36 +4,20 @@ session_start();
 // import du script pdo des fonctions qui accedent a la base de donnees
 require 'pdo/pdo_db_functions.php';
 // verification que l utilisateur ne passe pas par l URL si le test a commence
-if (isset($_SESSION['test']) && ($_SESSION['test']['start'])) {
-    header('location: formation_questionnaire.php');
+if (isset($_SESSION['current']) && ($_SESSION['current']['login'] != true)) {
+    header('location: index.php');
 }
 // ----------------------------//---------------------------
 //                      variables de session
 // ---------------------------------------------------------
-//----------------------------//----------------------------s
-//                       CURRENT SESSION
-// on verifie l existence du tableau des informations de session, sinon on le cree
-if (!isset($_SESSION['current'])) {
-    // initialisation du tableau 
-    $_SESSION['current'] = array();
-    $_SESSION['current']['page'] = '';
-    $_SESSION['current']['login'] = false;
-    $_SESSION['current']['userId'] = time();
-    $_SESSION['current']['userRole'] = 'Visitor';
-}
+//----------------------------//----------------------------
+//                      CURRENT SESSION
 // nom de la page en cours
 $_SESSION['current']['page'] = 'welcome';
-//                       CURRENT SESSION
+//                      CURRENT SESSION
 //----------------------------//----------------------------
 //----------------------------//----------------------------
 //                     ERROR MANAGEMENT
-// on verifie l existence du tableau d erreur, sinon on le cree
-if (!isset($_SESSION['error'])) {
-    // initialisation du tableau 
-    $_SESSION['error'] = array();
-    $_SESSION['error']['page'] = '';
-    $_SESSION['error']['message'] = '';
-}
 // on efface le message d erreur d une autre page
 if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     $_SESSION['error']['message'] = '';
@@ -68,8 +52,6 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- default stylesheet -->
     <link href="css/global.css" rel="stylesheet" type="text/css">
-    <!-- current page stylesheet -->
-    <link href="css/welcome.css" rel="stylesheet" type="text/css">
     <!-- font import -->
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 </head>
@@ -80,17 +62,79 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
     <!-- /import du header -->
 
     <div class="container global-padding-top pt-3 mb-5">
-        <!-- affiche un message de bienvenue -->
-        <div class="my-3">
-            <div class="mx-auto px-3 py-2 text-center info-message-bg">
-                <h2 class="card-title">Welcome <?= $_SESSION['current']['userName'] ?> !</h2>
-            </div>
-        </div>
-        <!-- /affiche un message de bienvenue -->
         <!------------------------------//----------------------------------------
                                     container global 
         ------------------------------------------------------------------------->
+        <!-- affiche un message de bienvenue -->
+        <div class="my-3">
+            <div class="mx-auto px-3 py-2 text-center info-message-bg">
+                <h1 class="card-title">Welcome <?= $_SESSION['current']['userName'] ?> !</h1>
+            </div>
+        </div>
+        <!-- /affiche un message de bienvenue -->
 
+        <div class="col-lg-4 bg-light text-dark rounded mx-auto pb-3">
+            <!-- update button -->
+            <div class="form-group my-0">
+                <a class="btn btn-success btn-circle btn-md mt-2" name="update" role="button" href="update_profile.php?profileId=<?= $_SESSION['current']['userId'] ?>">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <h3 class="text-center pb-3"><strong>Votre profil</strong></h3>
+
+            <?php
+            //-------------------------------------------------------------------
+            // appelle de la fonction recuperer les informations du profil
+            //-------------------------------------------------------------------
+            // condition de la recherce sql par email
+            $whereId = 'id';
+            $myProfil = userExist($whereId, $_SESSION['current']['userId']);
+            //
+            // var_dump($myProfil);die;
+            // 
+            // $date =date_create($myProfil['dateOfBirth']);
+            // var_dump(date_format($date, '\l\e l jS F Y')); die;
+            ?>
+
+            <ul class="list-group list-group-flush">
+                <!-- lastName en majuscule -->
+                <li class="list-group-item">
+                    <p><small>Nom</small></p><?= strtoupper($myProfil['lastName']) ?>
+                </li>
+
+                <!-- firstName 1ere lettre en majusule -->
+                <li class="list-group-item">
+                    <p><small>Prénom</small></p><?= ucfirst($myProfil['firstName']) ?>
+                </li>
+
+                <!-- date of birth -->
+                <li class="list-group-item">
+                    <p><small>Date de naissance</small></p><?= formatedDateTime($myProfil['dateOfBirth']) ?>
+                </li>
+
+                <!-- place of birth 1ere lettre en majusule -->
+                <li class="list-group-item">
+                    <p><small>Lieu de naissance</small></p><?= ucfirst($myProfil['placeOfBirth']) ?>
+                </li>
+
+                <!-- astrological sign -->
+                <li class="list-group-item">
+                    <p><small>signe astrologique</small></p><?= $myProfil['astrological_sign'] ?>
+                </li>
+
+                <!-- email -->
+                <li class="list-group-item">
+                    <p><small>Email</small></p><?= $myProfil['email'] ?>
+                </li>
+
+                <!-- presentation tronquee a 200 caracteres -->
+                <li class="list-group-item">
+                    <p><small>Présentation</small></p><?= mb_strimwidth($myProfil['presentation'], 0, 200, '...') ?>
+                </li>
+            </ul>
+        </div>
+        <!--------------------  /formulaire de login ----------------------------->
         <!------------------------------------------------------------------------
                                     container global 
         --------------------------------//--------------------------------------->

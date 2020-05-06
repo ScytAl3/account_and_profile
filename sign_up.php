@@ -7,10 +7,10 @@ require 'pdo/pdo_db_functions.php';
 //                  variables de session
 // ---------------------------------------------------------
 //----------------------------//----------------------------
-//                              USER
+//                      CURRENT SESSION
 // nom de la page en cours
 $_SESSION['current']['page'] = 'signup';
-//                              USER
+//                      CURRENT SESSION
 //----------------------------//----------------------------
 //----------------------------//----------------------------
 //                     ERROR MANAGEMENT
@@ -65,11 +65,11 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 		<div class="col-lg-4 bg-light text-dark rounded mx-auto">
 			<h1 class="text-center py-3">Inscription</h1>
 
-			<!-- area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+			<!-- area pour afficher un message d erreur lors de la validation de l inscription -->
 			<div class="alert alert-danger <?= ($_SESSION['error']['message'] != '') ? 'd-block' : 'd-none'; ?> mt-5" role="alert">
 				<p class="lead mt-2"><span><?= $_SESSION['error']['message'] ?></span></p>
 			</div>
-			<!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+			<!-- /area pour afficher un message d erreur lors de la validation de l inscription -->
 
 			<form class="form-inscription pb-2" action="php_process/signup_process.php" method="POST">
 				<!-- lastName input -->
@@ -84,19 +84,19 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 					<input class="form-control fa fa-user" type="text" name="firstName" id="firstName" placeholder="&#xf007; Votre prénom" required>
 				</div>
 
-				<!-- date of birth -->
+				<!-- date of birth input-->
 				<div class="form-group">
 					<label for="birthDate">Date de naissance</label>
 					<input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="" value="">
 				</div>
 
-				<!-- place of birth -->
+				<!-- place of birth input-->
 				<div class="form-group">
 					<label for="birthPlace">Lieu de naissance</label>
 					<input class="form-control fa fa-map-marker" type="text" name="birthPlace" id="birthPlace" placeholder="&#xf041; Votre lieu de naissance">
 				</div>
 
-				<!-- astrological sign -->
+				<!-- astrological sign input-->
 				<?php
 				//-------------------------------------------------------------------
 				// appelle de la fonction pour remplir la liste deroulante
@@ -124,19 +124,19 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 					</select>
 				</div>
 
-				<!-- email -->
+				<!-- email input-->
 				<div class="form-group">
 					<label for="email">Email <small>*</small></label>
 					<input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required>
 				</div>
 
-				<!-- password input -->
+				<!-- password input-->
 				<div class="form-group">
 					<label for="password">Mot de passe <small>*</small></label>
 					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" required>
 				</div>
 
-				<!-- presentation input -->
+				<!-- presentation input-->
 				<div class="form-group">
 					<label for="presentation">Présentation en quelques mots</label>
 					<textarea class="form-control fa fa-book" type="text" name="presentation" id="presentation" rows="10" placeholder="&#xf02d; Pas une biographie"></textarea>
@@ -150,7 +150,6 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<div class="form-group">
 					<button class="btn btn-valid-gradient btn-lg btn-block text-light text-uppercase" type="submit">Inscription</button>
 				</div>
-
 
 				<!-- reset button -->
 				<div class="form-group">

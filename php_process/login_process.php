@@ -35,11 +35,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $_SESSION['current']['userRole'] = $emailValid['role'];
             // on enregistre comme variables de session - le numero d identifiant
             $_SESSION['current']['userId'] = $emailValid['id'];
-            // on creer une variable de session login en cours
-            $_SESSION['current']['login'] = true;            
-            // on détruit les variables d erreur de login de notre session
-            unset($_SESSION['error']);
-            // redirection vers la page de bienvenue
+            // on met a jour la variable de session login en cours
+            $_SESSION['current']['login'] = true;
+            // ---------------------------------------------------------------------------------
+            //                       redirection vers la page de bienvenue
+            // ---------------------------------------------------------------------------------
             header('location: /../welcome.php');
             exit();
             // ---------------------------------------------------------------------------------

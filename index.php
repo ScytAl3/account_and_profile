@@ -3,10 +3,6 @@
 session_start();
 // import du script pdo des fonctions qui accedent a la base de donnees
 require 'pdo/pdo_db_functions.php';
-// verification que l utilisateur ne passe pas par l URL si le test a commence
-if (isset($_SESSION['test']) && ($_SESSION['test']['start'])) {
-    header('location: formation_questionnaire.php');
-}
 // ----------------------------//---------------------------
 //                      variables de session
 // ---------------------------------------------------------
@@ -104,11 +100,11 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <div class="col-lg-4 bg-light text-dark rounded mx-auto">
             <h1 class="text-center py-3">Connexion</h1>
 
-            <!-- area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+            <!-- area pour afficher un message d erreur lors de la validation du login -->
             <div class="alert alert-danger <?= ($_SESSION['error']['message'] != '') ? 'd-block' : 'd-none'; ?> mt-5" role="alert">
                 <p class="lead mt-2"><span><?= $_SESSION['error']['message'] ?></span></p>
             </div>
-            <!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
+            <!-- /area pour afficher un message d erreur lors de la validation du login -->
 
             <form class="form-signin p-3" method="POST" action="php_process/login_process.php">
                 <!-- email input -->

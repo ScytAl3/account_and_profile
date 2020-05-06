@@ -72,3 +72,20 @@ body {
   );
   font-size: 18px;
 }
+
+/*-- update profile button --*/
+.btn-circle {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding-top: 7px;
+  padding-left: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.btn-md {
+  border-radius: 50%;
+}

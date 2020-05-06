@@ -93,7 +93,8 @@ function mailFormat($inputMail)
     return (!preg_match($pattern, $inputMail)) ? false : true;
 }
 
-function pwdFormat($pwdInput) {
+function pwdFormat($pwdInput)
+{
     $pattern = "/.*^(?=.{12,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/";
     return (!preg_match($pattern, $pwdInput)) ? false : true;
 }
@@ -110,9 +111,7 @@ function pwdFormat($pwdInput) {
  */
 function formatedDateTime($mysqlDate)
 {
-    $date = date_format($mysqlDate, "d/m/Y");
-    $hour = date_format($mysqlDate, "H");
-    $minute = date_format($mysqlDate, "i");
-    // retourne la au format desire
-    return  $date . ' à ' . $hour . 'h' . $minute . '.';
+    setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+    // retourne la date au format desire si elle exite
+    return ($mysqlDate != '') ? strftime("%A %d %B %Y.", strtotime($mysqlDate)) : '';
 };

@@ -140,9 +140,9 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         $_SESSION['current']['userId'] = $newUser;
         // on creer une variable de session login en cours
         $_SESSION['current']['login'] = true;
-        // on détruit les variables d erreur de login de notre session
-        unset($_SESSION['error']);
-        // redirection vers la page de bienvenue
+        // ---------------------------------------------------------------------------------
+        //                       redirection vers la page de bienvenue
+        // ---------------------------------------------------------------------------------
         header('location: /../welcome.php');
         exit();
         // ---------------------------------------------------------------------------------
