@@ -71,7 +71,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 			</div>
 			<!-- /area pour afficher un message d erreur lors de la validation de l inscription -->
 
-			<form class="form-inscription pb-2" action="php_process/signup_process.php" method="POST">
+			<form class="form-inscription pb-2" action="php_process/<?= ($_SESSION['current']['login'] != true) ? 'signup_process.php' : 'update_profile_process.php'; ?>" method="POST">
 				<!-- lastName input -->
 				<div class="form-group">
 					<label for="lastName">Nom <small>*</small></label>
@@ -148,7 +148,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<!-- buttons area -->
 				<!-- submit button -->
 				<div class="form-group">
-					<button class="btn btn-valid-gradient btn-lg btn-block text-light text-uppercase" type="submit">Inscription</button>
+					<button class="btn btn-valid-gradient btn-lg btn-block text-light text-uppercase" type="submit"><?= ($_SESSION['current']['login'] != true) ? 'Inscription' : 'Mettre à jour'; ?></button>
 				</div>
 
 				<!-- reset button -->

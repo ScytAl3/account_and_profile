@@ -76,7 +76,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <div class="col-lg-4 bg-light text-dark rounded mx-auto pb-3">
             <!-- update button -->
             <div class="form-group my-0">
-                <a class="btn btn-success btn-circle btn-md mt-2" name="update" role="button" href="update_profile.php?profileId=<?= $_SESSION['current']['userId'] ?>">
+                <a class="btn btn-success btn-circle btn-md mt-2" name="update" role="button" href="sign_up.php?profileId=<?= $_SESSION['current']['userId'] ?>">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
             </div>
