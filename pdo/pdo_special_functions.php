@@ -11,12 +11,13 @@
  * 
  * @return String   chaine aleatoire de 10 caracteres
  */
-function generateSalt( $lenght = 10 ) {
+function generateSalt($lenght = 10)
+{
     $allowedChar = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxLenght = strlen($allowedChar);
     $randomString = '';
-    for ($i=0; $i < $lenght; $i++) { 
-        $randomString .= $allowedChar[rand(0, $maxLenght-1)];
+    for ($i = 0; $i < $lenght; $i++) {
+        $randomString .= $allowedChar[rand(0, $maxLenght - 1)];
     }
     $encryptedSalt = md5($randomString);
     return $encryptedSalt;
@@ -33,7 +34,7 @@ function generateSalt( $lenght = 10 ) {
  * 
  * @return String   chaine chiffree
  */
-function CreateEncryptedPassword( $salt, $password )
+function CreateEncryptedPassword($salt, $password)
 {
     $md5Pwd = md5($password);
     $encryptedPwd = md5($salt . $md5Pwd);
@@ -52,7 +53,7 @@ function CreateEncryptedPassword( $salt, $password )
  * 
  * @return Boolean  renvoie TRUE si le mot de passe saisi correspond - sinon FALSE
  */
-function VerifyEncryptedPassword( $userSalt, $userPwd, $loginPwd )
+function VerifyEncryptedPassword($userSalt, $userPwd, $loginPwd)
 {
     $encryptLoginPwd = CreateEncryptedPassword($userSalt, $loginPwd);
     return ($userPwd == $encryptLoginPwd) ? true : false;
@@ -78,10 +79,24 @@ var_dump($check);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // -----------------------------------------------------------------------------------
-// FONCTION : Affichage du signe astrologique en fonction de la date de naissance
+// FONCTION : Controle de la saisie a l'aide des expressions régulières
 // -----------------------------------------------------------------------------------
+function stringFormat($inputString)
+{
+    $pattern = "/^[A-ZÉÈÀÙÂÊÎÔÛÄËÏÖÜÇ]{1}[-a-z ]*$/";
+    return (!preg_match($pattern, $inputString)) ? false : true;
+}
 
-//          TODO
+function mailFormat($inputMail)
+{
+    $pattern = "/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix";
+    return (!preg_match($pattern, $inputMail)) ? false : true;
+}
+
+function pwdFormat($pwdInput) {
+    $pattern = "/.*^(?=.{12,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/";
+    return (!preg_match($pattern, $pwdInput)) ? false : true;
+}
 
 // --------------------------------------------------------------
 // FONCTION : Formatage de la date a afficher
@@ -93,10 +108,11 @@ var_dump($check);
  * 
  * @return String   la date formatee
  */
-function formatedDateTime($mysqlDate){
-    $date = date_format($mysqlDate,"d/m/Y");
+function formatedDateTime($mysqlDate)
+{
+    $date = date_format($mysqlDate, "d/m/Y");
     $hour = date_format($mysqlDate, "H");
     $minute = date_format($mysqlDate, "i");
     // retourne la au format desire
-    return  $date.' à '.$hour.'h'.$minute.'.';
+    return  $date . ' à ' . $hour . 'h' . $minute . '.';
 };

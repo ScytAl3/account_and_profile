@@ -34,7 +34,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             // on enregistre comme variables de session - le role 
             $_SESSION['current']['userRole'] = $emailValid['role'];
             // on enregistre comme variables de session - le numero d identifiant
-            $_SESSION['current']['userId'] = $emailValid['Id'];
+            $_SESSION['current']['userId'] = $emailValid['id'];
             // on creer une variable de session login en cours
             $_SESSION['current']['login'] = true;            
             // on détruit les variables d erreur de login de notre session

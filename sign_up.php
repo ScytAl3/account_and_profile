@@ -71,16 +71,16 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 			</div>
 			<!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
 
-			<form class="form-inscription pb-2" action="form_processing/signup_process.php" method="POST">
+			<form class="form-inscription pb-2" action="php_process/signup_process.php" method="POST">
 				<!-- lastName input -->
 				<div class="form-group">
-					<label for="lastName">Nom</label>
+					<label for="lastName">Nom <small>*</small></label>
 					<input class="form-control fa fa-user" type="text" name="lastName" id="lastName" placeholder="&#xf007; Votre nom" required>
 				</div>
 
 				<!-- firstName input -->
 				<div class="form-group">
-					<label for="firstName">Prénom</label>
+					<label for="firstName">Prénom <small>*</small></label>
 					<input class="form-control fa fa-user" type="text" name="firstName" id="firstName" placeholder="&#xf007; Votre prénom" required>
 				</div>
 
@@ -109,7 +109,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<div class="form-group">
 					<label for="astrologicalSign">Signe astrologique</label>
 					<select class="custom-select d-block" name="astrologicalSign" id="astrologicalSign">
-						<option value="" disabled selected>Sélectionnez...</option>
+						<option value="" selected>Sélectionnez...</option>
 						<!---------------------------------//-------------------------------------------
                                                     boucle pour remplir la liste deroulante-->
 						<?php
@@ -126,13 +126,13 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 
 				<!-- email -->
 				<div class="form-group">
-					<label for="email">Email</label>
+					<label for="email">Email <small>*</small></label>
 					<input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required>
 				</div>
 
 				<!-- password input -->
 				<div class="form-group">
-					<label for="password">Mot de passe</label>
+					<label for="password">Mot de passe <small>*</small></label>
 					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" required>
 				</div>
 
@@ -141,6 +141,9 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 					<label for="presentation">Présentation en quelques mots</label>
 					<textarea class="form-control fa fa-book" type="text" name="presentation" id="presentation" rows="10" placeholder="&#xf02d; Pas une biographie"></textarea>
 				</div>
+
+				<!-- information -->
+				<p class="text-center text-muted"><small>*</small> Champs requis</p>
 
 				<!-- buttons area -->
 				<!-- submit button -->

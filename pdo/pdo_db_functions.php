@@ -97,9 +97,9 @@ function createUser($userData) {
     $pdo = my_pdo_connexxion();
     // preparation de la requete pour creer un utilisateur
     $sqlInsert = "INSERT INTO 
-                                users (`userLastName`, `userFirstName`, `userEmail`, `userPassword`, `userSalt`, `accountCreated_at`, `userRole`) 
+                                users (`lastName`, `firstName`, `dateOfBirth`, `placeOfBirth`, `astrological_sign`, `email`, `password`, `salt`, `presentation`, `role`, `created_at`) 
                             VALUES 
-                                (?, ?, ?, ?, ?, now(), DEFAULT)";
+                                (?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, now())";
     // preparation de la requete pour execution
     try {
         $statement = $pdo -> prepare($sqlInsert, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

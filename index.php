@@ -110,7 +110,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
             </div>
             <!-- /area pour afficher un message d erreur lors de la validation du dossier de candidature -->
 
-            <form class="form-signin p-3" method="POST" action="php_process/signup_process.php">
+            <form class="form-signin p-3" method="POST" action="php_process/login_process.php">
                 <!-- email input -->
                 <div class="form-group">
                     <label for="email">Email</label>
