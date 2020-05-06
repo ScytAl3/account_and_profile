@@ -61,6 +61,28 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 		<!-----------------------------------//-----------------------------------------
                  					container global
 		-------------------------------------------------------------------------------->
+		<?php
+		// verification pour savoir si on arrive si la page de formulaire pour une inscription
+		// ou pour la mise a jour d un profile		
+		$update = false;
+		// si la variable de login est TRUE
+		if ($_SESSION['current']['login']) {
+			$update = true;
+			//-------------------------------------------------------------------
+			// appelle de la fonction recuperer les informations du profil
+			//-------------------------------------------------------------------
+			// condition de la recherce sql par id
+			$whereId = 'id';
+			$myProfil = userExist($whereId, $_SESSION['current']['userId']);
+		}
+		//-------------------------------------------------------------------
+		// appelle de la fonction pour remplir la liste deroulante
+		//-------------------------------------------------------------------
+		$astrologicalList = dropDownListReader('astrological_sign');
+		//
+		// var_dump($astrologicalList);die;
+		// 
+		?>
 		<!--------------------  formulaire de login ----------------------------->
 		<div class="col-lg-4 bg-light text-dark rounded mx-auto">
 			<h1 class="text-center py-3">Inscription</h1>
@@ -71,29 +93,29 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 			</div>
 			<!-- /area pour afficher un message d erreur lors de la validation de l inscription -->
 
-			<form class="form-inscription pb-2" action="php_process/<?= ($_SESSION['current']['login'] != true) ? 'signup_process.php' : 'update_profile_process.php'; ?>" method="POST">
+			<form class="form-inscription pb-2" action="php_process/<?= ($update) ? 'update_profile_process.php' : 'signup_process.php'; ?>" method="POST">
 				<!-- lastName input -->
 				<div class="form-group">
 					<label for="lastName">Nom <small>*</small></label>
-					<input class="form-control fa fa-user" type="text" name="lastName" id="lastName" placeholder="&#xf007; Votre nom" required>
+					<input class="form-control fa fa-user" type="text" name="lastName" id="lastName" placeholder="&#xf007; Votre nom" value="<?= ($update) ? $myProfil['lastName'] : '' ?>" required>
 				</div>
 
 				<!-- firstName input -->
-				<div class="form-group">
+				<div class=" form-group">
 					<label for="firstName">Prénom <small>*</small></label>
-					<input class="form-control fa fa-user" type="text" name="firstName" id="firstName" placeholder="&#xf007; Votre prénom" required>
+					<input class="form-control fa fa-user" type="text" name="firstName" id="firstName" placeholder="&#xf007; Votre prénom" value="<?= ($update) ? $myProfil['firstName'] : '' ?>" required>
 				</div>
 
 				<!-- date of birth input-->
-				<div class="form-group">
+				<div class=" form-group">
 					<label for="birthDate">Date de naissance</label>
-					<input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="" value="">
+					<input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="" value="<?= ($update) ? $myProfil['dateOfBirth'] : '' ?>">
 				</div>
 
 				<!-- place of birth input-->
 				<div class="form-group">
 					<label for="birthPlace">Lieu de naissance</label>
-					<input class="form-control fa fa-map-marker" type="text" name="birthPlace" id="birthPlace" placeholder="&#xf041; Votre lieu de naissance">
+					<input class="form-control fa fa-map-marker" type="text" name="birthPlace" id="birthPlace" placeholder="&#xf041; Votre lieu de naissance" value="<?= ($update) ? $myProfil['placeOfBirth'] : '' ?>">
 				</div>
 
 				<!-- astrological sign input-->
@@ -115,7 +137,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 						<?php
 						foreach ($astrologicalList as $key => $column) {
 						?>
-							<option value=<?= $column['sign_name'] ?>><?= $column['sign_name'] ?></option>
+							<option value=<?= $column['sign_name'] ?> <?= ($update && $column['sign_name'] == $myProfil['astrological_sign']) ? 'selected' : '' ?>><?= $column['sign_name'] ?></option>
 						<?php
 						}
 						?>
@@ -127,19 +149,19 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<!-- email input-->
 				<div class="form-group">
 					<label for="email">Email <small>*</small></label>
-					<input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" required>
+					<input class="form-control fa fa-envelope" type="text" name="email" id="email" placeholder="&#xf0e0; Votre adresse email" value="<?= ($update) ? $myProfil['email'] : '' ?>" required>
 				</div>
 
 				<!-- password input-->
 				<div class="form-group">
 					<label for="password">Mot de passe <small>*</small></label>
-					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" required>
+					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" value="<?= ($update) ? $myProfil['password'] : '' ?>" required>
 				</div>
 
 				<!-- presentation input-->
 				<div class="form-group">
 					<label for="presentation">Présentation en quelques mots</label>
-					<textarea class="form-control fa fa-book" type="text" name="presentation" id="presentation" rows="10" placeholder="&#xf02d; Pas une biographie"></textarea>
+					<textarea class="form-control fa fa-book" type="text" name="presentation" id="presentation" rows="10" placeholder="&#xf02d; Pas une biographie"><?= ($update) ? $myProfil['presentation'] : '' ?></textarea>
 				</div>
 
 				<!-- information -->

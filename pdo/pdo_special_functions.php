@@ -113,5 +113,5 @@ function formatedDateTime($mysqlDate)
 {
     setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
     // retourne la date au format desire si elle exite
-    return ($mysqlDate != '') ? strftime("%A %d %B %Y.", strtotime($mysqlDate)) : '';
+    return ($mysqlDate != '') ? utf8_encode(strftime("%A %d %B %Y.", strtotime($mysqlDate))) : '';
 };

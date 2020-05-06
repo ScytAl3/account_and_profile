@@ -76,7 +76,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <div class="col-lg-4 bg-light text-dark rounded mx-auto pb-3">
             <!-- update button -->
             <div class="form-group my-0">
-                <a class="btn btn-success btn-circle btn-md mt-2" name="update" role="button" href="sign_up.php?profileId=<?= $_SESSION['current']['userId'] ?>">
+                <a class="btn btn-success btn-circle btn-md mt-2" name="update" role="button" href="sign_up.php">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
             </div>
@@ -87,16 +87,14 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
             //-------------------------------------------------------------------
             // appelle de la fonction recuperer les informations du profil
             //-------------------------------------------------------------------
-            // condition de la recherce sql par email
+            // condition de la recherce sql par id
             $whereId = 'id';
             $myProfil = userExist($whereId, $_SESSION['current']['userId']);
             //
             // var_dump($myProfil);die;
-            // 
-            // $date =date_create($myProfil['dateOfBirth']);
-            // var_dump(date_format($date, '\l\e l jS F Y')); die;
+            //
             ?>
-
+            <!--------------------  information du profil ----------------------------->
             <ul class="list-group list-group-flush">
                 <!-- lastName en majuscule -->
                 <li class="list-group-item">
@@ -134,7 +132,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
                 </li>
             </ul>
         </div>
-        <!--------------------  /formulaire de login ----------------------------->
+        <!--------------------  /information du profil ----------------------------->
         <!------------------------------------------------------------------------
                                     container global 
         --------------------------------//--------------------------------------->
