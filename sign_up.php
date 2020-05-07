@@ -85,7 +85,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 		?>
 		<!--------------------  formulaire de login ----------------------------->
 		<div class="col-lg-4 bg-light text-dark rounded mx-auto">
-			<h1 class="text-center py-3">Inscription</h1>
+			<h1 class="text-center py-3"><?= ($update) ? 'Modification' : 'Inscription'; ?></h1>
 
 			<!-- area pour afficher un message d erreur lors de la validation de l inscription -->
 			<div class="alert alert-danger <?= ($_SESSION['error']['message'] != '') ? 'd-block' : 'd-none'; ?> mt-5" role="alert">
@@ -132,8 +132,8 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 					<label for="astrologicalSign">Signe astrologique</label>
 					<select class="custom-select d-block" name="astrologicalSign" id="astrologicalSign">
 						<option value="" selected>Sélectionnez...</option>
-						<!---------------------------------//-------------------------------------------
-                                                    boucle pour remplir la liste deroulante-->
+						<!---------------------------------//------------------------------------------
+                                            boucle pour remplir la liste deroulante					-->
 						<?php
 						foreach ($astrologicalList as $key => $column) {
 						?>
@@ -142,7 +142,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 						}
 						?>
 						<!--                 boucle pour remplir la liste deroulante
-                            ---------------------------------//------------------------------------------->
+                        ---------------------------------//------------------------------------------->
 					</select>
 				</div>
 
@@ -155,7 +155,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<!-- password input-->
 				<div class="form-group">
 					<label for="password">Mot de passe <small>*</small></label>
-					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" value="<?= ($update) ? $myProfil['password'] : '' ?>" required>
+					<input class="form-control fa fa-key" type="password" name="password" id="password" placeholder="&#xf084; Votre mot de passe" <?= ($update) ? '' : 'required' ?>>
 				</div>
 
 				<!-- presentation input-->
@@ -168,6 +168,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<p class="text-center text-muted"><small>*</small> Champs requis</p>
 
 				<!-- buttons area -->
+
 				<!-- submit button -->
 				<div class="form-group">
 					<button class="btn btn-valid-gradient btn-lg btn-block text-light text-uppercase" type="submit"><?= ($_SESSION['current']['login'] != true) ? 'Inscription' : 'Mettre à jour'; ?></button>
@@ -177,6 +178,7 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
 				<div class="form-group">
 					<button class="btn btn-reset-gradient btn-lg btn-block text-light text-uppercase" type="reset">Annuler</button>
 				</div>
+
 				<!-- /buttons area -->
 			</form>
 		</div>

@@ -65,6 +65,12 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         <!------------------------------//----------------------------------------
                                     container global 
         ------------------------------------------------------------------------->
+        <!-- message d information lors d une mise a jour du profil -->
+        <div class="alert alert-info text-center <?= ($_SESSION['error']['message'] != '') ? 'd-block' : 'd-none'; ?>" role="alert">
+            <p class="lead mt-2"><span><?= $_SESSION['error']['message'] ?></span></p>            
+        </div>
+        <!-- /message d information lors d une mise a jour du profil -->
+
         <!-- affiche un message de bienvenue -->
         <div class="my-3">
             <div class="mx-auto px-3 py-2 text-center info-message-bg">

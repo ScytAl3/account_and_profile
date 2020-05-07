@@ -83,7 +83,7 @@ var_dump($check);
 // -----------------------------------------------------------------------------------
 function stringFormat($inputString)
 {
-    $pattern = "/^[A-ZÉÈÀÙÂÊÎÔÛÄËÏÖÜÇ]{1}[-a-z ]*$/";
+    $pattern = "/^[A-ZÉÈÀÙÂÊÎÔÛÄËÏÖÜÇ]{1}[-a-zA-Z ]*$/";
     return (!preg_match($pattern, $inputString)) ? false : true;
 }
 
@@ -95,7 +95,7 @@ function mailFormat($inputMail)
 
 function pwdFormat($pwdInput)
 {
-    $pattern = "/.*^(?=.{12,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/";
+    $pattern = "/.*^(?=.{12,100})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/";
     return (!preg_match($pattern, $pwdInput)) ? false : true;
 }
 

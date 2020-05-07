@@ -141,8 +141,11 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         // on creer une variable de session login en cours
         $_SESSION['current']['login'] = true;
         // ---------------------------------------------------------------------------------
-        //                       redirection vers la page de bienvenue
+        //             redirection vers la page de bienvenue  - affichage du profil
         // ---------------------------------------------------------------------------------
+        // on renvoie un message pour informer de la mise a jour
+        $_SESSION['error']['page'] = 'welcome';
+        $_SESSION['error']['message'] = "Votre profil a été crée !";
         header('location: /../welcome.php');
         exit();
         // ---------------------------------------------------------------------------------

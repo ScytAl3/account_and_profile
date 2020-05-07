@@ -4,7 +4,6 @@
 require '../pdo/pdo_db_functions.php';
 // on demarre notre session 
 session_start();
-echo 'update'; die;
 //
 //var_dump($_POST);die;
 //
@@ -22,9 +21,9 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
     // var_dump($emailTest); die;
     //
     // ---------------------------------------------------------------------------------
-    //                                 si  - email exist
+    //             si  - email exist & id different de l utilisateur en cours
     // ---------------------------------------------------------------------------------
-    if ($emailTest) {
+    if ($emailTest && ($emailTest['id'] != $_SESSION['current']['userId'])) {
         // on renvoie une message d erreur (email unique)
         $_SESSION['error']['page'] = 'signup';
         $_SESSION['error']['message'] = "Cette adresse mail est déjà associée à un compte !";
@@ -64,16 +63,6 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         header('location:/../sign_up.php');
         exit;
     }
-
-    // verification format du password
-    if (!pwdFormat($_POST['password'])) {
-        // on renvoie une message d erreur (format password)
-        $_SESSION['error']['page'] = 'signup';
-        $_SESSION['error']['message'] = "Password: de 12 caractères minimum contenant 1 majuscule, 1 chiffre et un caractère spécial!";
-        // on redirige vers la page du formulaire d inscription
-        header('location:/../sign_up.php');
-        exit;
-    }
     // ---------------------------------------------------------------------------------
     //                    verification de la saisie des champs optionnels
     // ---------------------------------------------------------------------------------
@@ -103,47 +92,100 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         }
     }
     // -----------------------------------------------------------------------------------------------
-    //          on creer le Salt et le mot de passe chiffre associes a ce nouvel utilisateur
+    //          le champ password n est pas obligatoire pour la mise a jour du profil
+    //          on creer le Salt et le mot de passe chiffre associes a cet utilisateur
+    //          uniquement si c est un nouveau mot de passe
     // -----------------------------------------------------------------------------------------------
-    // creation du Salt
-    $userSalt = generateSalt(10);
-    // creation du mot de passe associe au Salt
-    $userEncryptPwd = CreateEncryptedPassword($userSalt, $_POST['password']);
-    // on recupere les informations saisies et le mot de passe chiffre dans un tableau 
-    // si aucune date n a ete saisie on l a definie a null
-    $dateOfBirth = ($_POST['birthDate'] != '') ? $_POST['birthDate'] : null;
-    $userData = [
-        $_POST['lastName'],
-        $_POST['firstName'],
-        $dateOfBirth,
-        $_POST['birthPlace'],
-        $_POST['astrologicalSign'],
-        $_POST['email'],
-        $userEncryptPwd,
-        $userSalt,
-        $_POST['presentation']
-    ];
-    // ---------------------------------------------------------------------------
-    //                                  on creer l utilisateur
-    // ---------------------------------------------------------------------------
-    $newUser = createUser($userData);
+    // si un mot de passe a ete saisi
+    if ($_POST['password'] != '') {
+        // verification format du password
+        if (!pwdFormat($_POST['password'])) {
+            // on renvoie une message d erreur (format password)
+            $_SESSION['error']['page'] = 'signup';
+            $_SESSION['error']['message'] = "Password: entre 12 et 100 caractères contenant 1 majuscule, 1 chiffre et un caractère spécial!";
+            // on redirige vers la page du formulaire d inscription
+            header('location:/../sign_up.php');
+            exit;
+        }
+        // creation du Salt
+        $userSalt = generateSalt(10);
+        // creation du mot de passe associe au Salt
+        $userEncryptPwd = CreateEncryptedPassword($userSalt, $_POST['password']);
+        // on recupere les informations saisies et le mot de passe chiffre dans un tableau 
+        // si aucune date n a ete saisie on l a definie a null
+        $dateOfBirth = ($_POST['birthDate'] != '') ? $_POST['birthDate'] : null;
+        $userData = [
+            'lastName' => $_POST['lastName'],
+            'firstName' => $_POST['firstName'],
+            'dateOfBirth' => $dateOfBirth,
+            'placeOfBirth' => $_POST['birthPlace'],
+            'astrological_sign' => $_POST['astrologicalSign'],
+            'email' => $_POST['email'],
+            'password' => $userEncryptPwd,
+            'salt' => $userSalt,
+            'presentation' => $_POST['presentation'],
+            'userId' => $_SESSION['current']['userId']
+        ];
+        // ---------------------------------------------------------------------------
+        //                             mise a jour du profil
+        // ---------------------------------------------------------------------------
+        $updatedProfil = updateFullProfil($userData);
+        // ---------------------------------------------------------------------------------
+        //                   si  - la modification s est bien deroulee
+        // ---------------------------------------------------------------------------------
+        if ($updatedProfil) {
+            // ------------------------------------------------------------------------------------------
+            //      deconnexion de l utilisateur pour qu il se logge avec son nouveau mot de passe
+            // ------------------------------------------------------------------------------------------
+            // on renvoie un message pour informer de la mise a jour
+            $_SESSION['error']['page'] = 'index';
+            $_SESSION['error']['message'] = "Veuillez vous reconnecter avec votre nouveau mot de passe !";
+            header('location: /../relog.php');
+            exit();
+            // ---------------------------------------------------------------------------------
+            //                      sinon  - newUser = FALSE
+            // --------------------------------------------------------------------------------- 
+        } else {
+            // on renvoie un message d erreur
+            $_SESSION['error']['page'] = 'welcome';
+            $_SESSION['error']['message'] = "Problème lors de la création de votre compte: " . $updatedProfil;
+            // on redirige vers la page signup
+            header('location:/../sign_up.php');
+            exit();
+        }
+    // sinon le mot de passe reste le meme
+    } else {
+        // si aucune date n a ete saisie on l a definie a null
+        $dateOfBirth = ($_POST['birthDate'] != '') ? $_POST['birthDate'] : null;
+        $userData = [
+            'lastName' => $_POST['lastName'],
+            'firstName' => $_POST['firstName'],
+            'dateOfBirth' => $dateOfBirth,
+            'placeOfBirth' => $_POST['birthPlace'],
+            'astrological_sign' => $_POST['astrologicalSign'],
+            'email' => $_POST['email'],
+            'presentation' => $_POST['presentation'],
+            'userId' => $_SESSION['current']['userId']
+        ];
+        // ---------------------------------------------------------------------------
+        //                             mise a jour du profil
+        // ---------------------------------------------------------------------------
+        $updatedProfil = updateSimpleProfil($userData);
+    }    
     // ---------------------------------------------------------------------------------
-    //                   si  - enregistrement s est bien deroule = new id
+    //                   si  - la modification s est bien deroulee
     // ---------------------------------------------------------------------------------
-    if ($newUser > 0) {
+    if ($updatedProfil) {
         // on enregistre comme variables de session userName - le nom et le prenom concatene        
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $_SESSION['current']['userName'] = $firstName . ' ' . $lastName;
-        // on enregistre comme variables de session - le role 
-        $_SESSION['current']['userRole'] = 'ROLE_USER';
-        // on enregistre comme variables de session - le numero d identifiant
-        $_SESSION['current']['userId'] = $newUser;
-        // on creer une variable de session login en cours
-        $_SESSION['current']['login'] = true;
         // ---------------------------------------------------------------------------------
-        //                       redirection vers la page de bienvenue
+        //              redirection vers la page de bienvenue - affichage du profil
         // ---------------------------------------------------------------------------------
+        // on renvoie un message pour informer de la mise a jour
+        $_SESSION['error']['page'] = 'welcome';
+        $_SESSION['error']['message'] = "Votre profil a été mis à jour !";
         header('location: /../welcome.php');
         exit();
         // ---------------------------------------------------------------------------------
@@ -151,8 +193,8 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         // --------------------------------------------------------------------------------- 
     } else {
         // on renvoie un message d erreur
-        $_SESSION['error']['page'] = 'sign_up';
-        $_SESSION['error']['message'] = "Problème lors de la création de votre compte !";
+        $_SESSION['error']['page'] = 'welcome';
+        $_SESSION['error']['message'] = "Problème lors de la création de votre compte: " . $updatedProfil;
         // on redirige vers la page signup
         header('location:/../sign_up.php');
         exit();
