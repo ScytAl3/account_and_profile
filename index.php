@@ -150,9 +150,9 @@ if ($_SESSION['current']['page'] != $_SESSION['error']['page']) {
         --------------------------------//--------------------------------------->
     </div>
 
-    <!-- import du header -->
+    <!-- import du footer -->
     <?php include 'partials/footer.php'; ?>
-    <!-- /import du header -->
+    <!-- /import du footer -->
     <!------------------------------------------>
     <?= var_dump($_SESSION) ?>
     <!------------------------------------------>
