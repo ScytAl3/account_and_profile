@@ -40,7 +40,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             // ---------------------------------------------------------------------------------
             //                       redirection vers la page de bienvenue
             // ---------------------------------------------------------------------------------
-            header('location: /../welcome.php');
+            header('location: ../welcome.php');
             exit();
             // ---------------------------------------------------------------------------------
             //                                  sinon  - password invalid
@@ -50,7 +50,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $_SESSION['error']['page'] = 'index';
             $_SESSION['error']['message'] = "Erreur de connexion, veuillez vérifier vos identifiants de connexion";
             // on redirige vers la page de login
-            header('location:/../index.php');
+            header('location:../index.php');
             exit();
         }
         // ---------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $_SESSION['error']['page'] = 'index';
         $_SESSION['error']['message'] = "Erreur de connexion, veuillez vérifier vos identifiants de connexion";
         // on redirige vers la page de login
-        header('location:/../index.php');
+        header('location:../index.php');
         exit();
     }
 }

@@ -50,7 +50,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         $_SESSION['error']['page'] = 'signup';
         $_SESSION['error']['message'] = "Prénom: Commence par une majuscule - uniquement lettres, espace et trait d'union!";
         // on redirige vers la page du formulaire d inscription
-        header('location:/../sign_up.php');
+        header('location:../sign_up.php');
         exit;
     }
 
@@ -60,7 +60,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         $_SESSION['error']['page'] = 'signup';
         $_SESSION['error']['message'] = "Email: l'adresse mail doit être normalisée!";
         // on redirige vers la page du formulaire d inscription
-        header('location:/../sign_up.php');
+        header('location:../sign_up.php');
         exit;
     }
     // ---------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
             $_SESSION['error']['page'] = 'signup';
             $_SESSION['error']['message'] = "Date de naissance: vous devez avoir au moins 16 ans pour créer un compte!";
             // on redirige vers la page du formulaire d inscription
-            header('location:/../sign_up.php');
+            header('location:../sign_up.php');
             exit;
         }
     }
@@ -87,7 +87,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
             $_SESSION['error']['page'] = 'signup';
             $_SESSION['error']['message'] = "Lieu de naissance: Commence par une majuscule - uniquement lettres, espace et trait d'union!";
             // on redirige vers la page du formulaire d inscription
-            header('location:/../sign_up.php');
+            header('location:../sign_up.php');
             exit;
         }
     }
@@ -104,7 +104,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
             $_SESSION['error']['page'] = 'signup';
             $_SESSION['error']['message'] = "Password: entre 12 et 100 caractères contenant 1 majuscule, 1 chiffre et un caractère spécial!";
             // on redirige vers la page du formulaire d inscription
-            header('location:/../sign_up.php');
+            header('location:../sign_up.php');
             exit;
         }
         // creation du Salt
@@ -140,7 +140,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
             // on renvoie un message pour informer de la mise a jour
             $_SESSION['error']['page'] = 'index';
             $_SESSION['error']['message'] = "Veuillez vous reconnecter avec votre nouveau mot de passe !";
-            header('location: /../relog.php');
+            header('location: ../relog.php');
             exit();
             // ---------------------------------------------------------------------------------
             //                      sinon  - newUser = FALSE
@@ -150,7 +150,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
             $_SESSION['error']['page'] = 'welcome';
             $_SESSION['error']['message'] = "Problème lors de la création de votre compte: " . $updatedProfil;
             // on redirige vers la page signup
-            header('location:/../sign_up.php');
+            header('location:../sign_up.php');
             exit();
         }
     // sinon le mot de passe reste le meme
@@ -186,7 +186,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         // on renvoie un message pour informer de la mise a jour
         $_SESSION['error']['page'] = 'welcome';
         $_SESSION['error']['message'] = "Votre profil a été mis à jour !";
-        header('location: /../welcome.php');
+        header('location: ../welcome.php');
         exit();
         // ---------------------------------------------------------------------------------
         //                      sinon  - newUser = FALSE
@@ -196,7 +196,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
         $_SESSION['error']['page'] = 'welcome';
         $_SESSION['error']['message'] = "Problème lors de la création de votre compte: " . $updatedProfil;
         // on redirige vers la page signup
-        header('location:/../sign_up.php');
+        header('location:../sign_up.php');
         exit();
     }
     // ---------------------------------------------------------------------------------
@@ -207,7 +207,7 @@ if (isset($_POST['lastName'], $_POST['firstName'], $_POST['birthDate'], $_POST['
     $_SESSION['error']['page'] = 'signup';
     $_SESSION['error']['message'] = "Il y a eu un problème lors de l'envoi de votre formulaire !";
     // on redirige vers la page signup
-    header('location:/../sign_up.php');
+    header('location:../sign_up.php');
     exit();
 }
 
